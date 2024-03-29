@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 // 단어 뒤집기
 public class Main {
@@ -8,18 +9,19 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine());
 
+        StringBuilder sb;
+        StringTokenizer st;
         for (int i = 0; i < t; i++) {
-            String str = br.readLine();
-
-            StringBuilder sb = new StringBuilder();
-            for (int j = str.length() - 1; j >= 0; j--) {
-                sb.append(str.charAt(j));
-            }
-
-            String[] arr = sb.toString().split(" ");
+            st = new StringTokenizer(br.readLine());
             sb = new StringBuilder();
-            for (int j = arr.length - 1; j >= 0; j--) {
-                sb.append(arr[j]).append(" ");
+
+            while (st.hasMoreTokens()) {
+                String next = st.nextToken();
+                for(int j = next.length() - 1; j >= 0; j--){
+                    sb.append(next.charAt(j));
+                }
+
+                sb.append(" ");
             }
 
             System.out.println(sb);
