@@ -4,12 +4,8 @@ public class Solution {
     public int[] solution(int []arr) {
         Stack<Integer> stack = new Stack<>();
         for (int num : arr) {
-            if (stack.isEmpty()) {
+            if (stack.isEmpty() || stack.peek() != num) {
                 stack.push(num);
-            } else {
-                if (stack.peek() != num) {
-                    stack.push(num);
-                }
             }
         }
 
@@ -17,7 +13,7 @@ public class Solution {
         for (int i = answer.length - 1; i >= 0; i--) {
             answer[i] = stack.pop();
         }
-        
+
         return answer;
     }
 }
