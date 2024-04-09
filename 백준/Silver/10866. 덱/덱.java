@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 // 덱
 public class Main {
@@ -11,41 +11,61 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
 
-        List<Integer> deque = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            String[] command = br.readLine().split(" ");
+        Deque<Integer> deque = new LinkedList<>();
 
-            switch (command[0]) {
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+
+            String command = st.nextToken();
+            switch (command) {
                 case "push_front":
-                    deque.add(0, Integer.parseInt(command[1]));
+                    deque.addFirst(Integer.parseInt(st.nextToken()));
                     break;
                 case "push_back":
-                    deque.add(Integer.parseInt(command[1]));
+                    deque.addLast(Integer.parseInt(st.nextToken()));
                     break;
                 case "pop_front":
-                    int removeFront = deque.size() == 0 ? -1 : deque.remove(0);
-                    System.out.println(removeFront);
+                    if (!deque.isEmpty()) {
+                        sb.append(deque.pollFirst()).append("\n");
+                    } else {
+                        sb.append(-1).append("\n");
+                    }
                     break;
                 case "pop_back":
-                    int removeBack = deque.size() == 0 ? -1 : deque.remove(deque.size() - 1);
-                    System.out.println(removeBack);
+                    if (!deque.isEmpty()) {
+                        sb.append(deque.pollLast()).append("\n");
+                    } else {
+                        sb.append(-1).append("\n");
+                    }
                     break;
                 case "size":
-                    System.out.println(deque.size());
+                    sb.append(deque.size()).append("\n");
                     break;
                 case "empty":
-                    int empty = deque.isEmpty() ? 1 : 0;
-                    System.out.println(empty);
+                    if (deque.isEmpty()) {
+                        sb.append(1).append("\n");
+                    } else {
+                        sb.append(0).append("\n");
+                    }
                     break;
                 case "front":
-                    int front = deque.size() == 0 ? -1 : deque.get(0);
-                    System.out.println(front);
+                    if (!deque.isEmpty()) {
+                        sb.append(deque.peekFirst()).append("\n");
+                    } else {
+                        sb.append(-1).append("\n");
+                    }
                     break;
                 case "back":
-                    int back = deque.size() == 0 ? -1 : deque.get(deque.size() - 1);
-                    System.out.println(back);
+                    if (!deque.isEmpty()) {
+                        sb.append(deque.peekLast()).append("\n");
+                    } else {
+                        sb.append(-1).append("\n");
+                    }
                     break;
             }
         }
+        System.out.println(sb);
     }
 }
