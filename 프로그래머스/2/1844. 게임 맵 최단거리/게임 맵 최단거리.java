@@ -2,7 +2,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
-    
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     static boolean[][] visited;
@@ -16,7 +15,7 @@ class Solution {
 
         bfs(0, 0, maps);
 
-        return maps[n - 1][m - 1] == 1 ? -1 : maps[n - 1][m - 1];
+        return maps[n - 1][m - 1] == 1 ? -1 :maps[n - 1][m - 1];
     }
     
     private static void bfs(int x, int y, int[][] maps) {
