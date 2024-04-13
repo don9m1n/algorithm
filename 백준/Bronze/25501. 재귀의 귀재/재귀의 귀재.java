@@ -17,18 +17,14 @@ public class Main {
         }
     }
 
-    static int recursion(String word, int start, int end) {
+    public static int recursion(String s, int l, int r){
         count++;
-        if (start >= end) {
-            return 1;
-        } else if (word.charAt(start) != word.charAt(end)) {
-            return 0;
-        } else {
-            return recursion(word, start + 1, end - 1);
-        }
+        if(l >= r) return 1;
+        else if(s.charAt(l) != s.charAt(r)) return 0;
+        else return recursion(s, l+1, r-1);
     }
 
-    static int isPalindrome(String word) {
-        return recursion(word, 0, word.length() - 1);
+    private static int isPalindrome(String str) {
+        return recursion(str, 0, str.length() - 1);
     }
 }
