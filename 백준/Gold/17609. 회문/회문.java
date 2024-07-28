@@ -30,10 +30,8 @@ public class Main {
             if (word.charAt(left) != word.charAt(right)) {
                 if (isPalindrome(word, left + 1, right)) {
                     return true;
-                } else if (isPalindrome(word, left, right - 1)) {
-                    return true;
                 } else {
-                    return false;
+                    return isPalindrome(word, left, right - 1);
                 }
             }
 
@@ -59,5 +57,4 @@ public class Main {
 
         return true;
     }
-
 }
