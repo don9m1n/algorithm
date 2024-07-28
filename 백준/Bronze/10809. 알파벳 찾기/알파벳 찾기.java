@@ -14,6 +14,7 @@ public class Main {
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
 
+            // 처음 나온 경우에만 위치를 갱신해준다.
             if (arr[ch - 97] == -1) {
                 arr[ch - 97] = i; // 97 = 'a', 'b' - 97 = 1
             }
