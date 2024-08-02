@@ -19,7 +19,7 @@ public class Main {
 
         int checkNumber = num + (3 - index);
 
-        if (checkNumber % 3 == 0 && checkNumber % 5 == 0) {
+        if (checkNumber % 15 == 0) {
             System.out.println("FizzBuzz");
         } else if (checkNumber % 3 == 0) {
             System.out.println("Fizz");
@@ -29,5 +29,4 @@ public class Main {
             System.out.println(checkNumber);
         }
     }
-    
 }
