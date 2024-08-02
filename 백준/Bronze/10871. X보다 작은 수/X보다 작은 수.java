@@ -19,6 +19,7 @@ public class Main {
                 sb.append(num).append(" ");
             }
         }
+
         System.out.println(sb);
     }
 }
