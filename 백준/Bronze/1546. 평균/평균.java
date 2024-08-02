@@ -18,7 +18,6 @@ public class Main {
             max = Math.max(max, num);
         }
 
-
         double sum = 0;
         for (int i = 0; i < n; i++) {
             sum += (arr[i] / max) * 100;
@@ -26,5 +25,4 @@ public class Main {
 
         System.out.println(sum / n);
     }
-
 }
