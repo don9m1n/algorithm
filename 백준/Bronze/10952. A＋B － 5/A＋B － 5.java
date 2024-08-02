@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // StringTokenizer EOF 불가!
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         while(true) {
             st = new StringTokenizer(br.readLine(), " ");
@@ -18,7 +18,9 @@ public class Main {
                 break;
             }
 
-            System.out.println(num1 + num2);
+            sb.append(num1 + num2).append("\n");
         }
+
+        System.out.println(sb);
     }
 }
