@@ -16,17 +16,13 @@ public class Main {
             queue.add(i);
         }
 
-        int count = 0;
         StringBuilder answer = new StringBuilder("<");
         while (queue.size() > 1) {
-            if (count == k - 1) {
-                answer.append(queue.poll()).append(", ");
-                count = 0;
-                continue;
+            for (int i = 0; i < k - 1; i++) {
+                queue.add(queue.poll());
             }
 
-            queue.add(queue.poll());
-            count++;
+            answer.append(queue.poll()).append(", ");
         }
 
         System.out.println(answer.append(queue.poll()).append(">"));
