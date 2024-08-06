@@ -21,14 +21,14 @@ public class Main {
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < bracket.length(); i++) {
-            if (bracket.charAt(i) == '(') {
-                stack.push(bracket.charAt(i));
-            } else if (bracket.charAt(i) == ')') {
-                if (stack.isEmpty()) {
-                    return "NO";
-                } else {
-                    stack.pop();
-                }
+            char ch = bracket.charAt(i);
+
+            if (ch == '(') {
+                stack.push(ch);
+            } else if (!stack.isEmpty()) {
+                stack.pop();
+            } else {
+                return "NO";
             }
         }
 
