@@ -24,19 +24,17 @@ public class Main {
 
             if (ch == '(' || ch == '[') {
                 stack.push(ch);
-            } else if (stack.isEmpty() && (ch == ')' || ch == ']')) {
-                return "no";
             } else if (ch == ')') {
-                if (stack.peek() == '(') {
-                    stack.pop();
+                if (stack.isEmpty() || stack.peek() != '(') {
+                    return "no";
                 } else {
-                    stack.push(ch);
+                    stack.pop();
                 }
             } else if (ch == ']') {
-                if (stack.peek() == '[') {
-                    stack.pop();
+                if (stack.isEmpty() || stack.peek() != '[') {
+                    return "no";
                 } else {
-                    stack.push(ch);
+                    stack.pop();
                 }
             }
         }
