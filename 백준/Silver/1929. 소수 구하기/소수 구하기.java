@@ -12,22 +12,22 @@ public class Main {
         int m = Integer.parseInt(st.nextToken());
         int n = Integer.parseInt(st.nextToken());
 
-        boolean[] isPrime = new boolean[n + 1];
-        Arrays.fill(isPrime, true);
+        boolean[] prime = new boolean[n + 1];
+        Arrays.fill(prime, true);
 
-        isPrime[0] = isPrime[1] = false;
+        prime[0] = prime[1] = false; // 0, 1 = 소수 X
 
-        for (int i = 2; i * i <= n; i++) {
-            if (isPrime[i]) {
+        for (int i = 2; i * i <= n ; i++) {
+            if (prime[i]) {
                 for (int j = i * i; j <= n; j += i) {
-                    isPrime[j] = false;
+                    prime[j] = false; // 소수의 배수들은 소수가 아님
                 }
             }
         }
 
         StringBuilder answer = new StringBuilder();
         for (int i = m; i <= n; i++) {
-            if (isPrime[i]) {
+            if (prime[i]) {
                 answer.append(i).append("\n");
             }
         }
