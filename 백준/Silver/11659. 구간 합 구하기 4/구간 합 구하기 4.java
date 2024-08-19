@@ -26,14 +26,11 @@ public class Main {
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
 
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            
+            answer.append(prefix[end] - prefix[start - 1]).append("\n");
 
-            if (x == y) {
-                answer.append(arr[y]).append("\n");
-            } else {
-                answer.append(prefix[y] - prefix[x - 1]).append("\n");
-            }
         }
 
         System.out.println(answer);
