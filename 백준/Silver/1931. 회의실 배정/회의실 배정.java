@@ -26,15 +26,15 @@ public class Main {
             return o1[1] - o2[1];
         });
 
-        int count = 1;
-        int s = arr[0][0];
-        int e = arr[0][1];
+        int count = 0;
+        int prev = 0;
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
 
-            if (arr[i][0] >= e) {
+            // 다음 회의 시작 시간이 이전 종료 시각보다 큰 경우 회의실 사용 가능
+            if (arr[i][0] >= prev) {
+                prev = arr[i][1];
                 count++;
-                e = arr[i][1];
             }
         }
 
