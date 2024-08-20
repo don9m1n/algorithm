@@ -12,10 +12,9 @@ public class Main {
 
         for (int i = 1; i <= n; i++) {
 
-            int sqrt = (int) Math.sqrt(i);
             int min = Integer.MAX_VALUE;
 
-            for (int j = 1; j <= sqrt; j++) {
+            for (int j = 1; j * j <= i; j++) {
                 min = Math.min(min, dp[i - j * j]);
             }
 
