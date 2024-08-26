@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,36 +15,31 @@ public class Main {
         st = new StringTokenizer(br.readLine());
 
         int[] arr = new int[n];
+
+        int max = 0;
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
+            max = Math.max(max, arr[i]);
         }
 
-        Arrays.sort(arr);
-
-        long answer = 0;
         long low = 0;
-        long high = arr[n - 1];
-        while (true) {
-            
+        long high = max;
+        while (high >= low) {
+
             long sum = 0;
             long mid = (low + high) / 2;
 
             for (int i = 0; i < n; i++) {
-                sum += Math.max(0, arr[i] - mid);
+                sum += arr[i] > mid ? arr[i] - mid : 0;
             }
 
-            if (sum >= m) {
-                if (low > high) {
-                    answer = mid;
-                    break;
-                } else {
-                    low = mid + 1;
-                }
-            } else {
+            if (sum < m) {
                 high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
 
-        System.out.println(answer);
+        System.out.println(high);
     }
 }
