@@ -1,77 +1,84 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
-// 단지번호붙이기
 public class Main {
 
-    // 상하좌우
     static int n;
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
     static int[][] map;
     static boolean[][] visited;
-    static PriorityQueue<Integer> pq = new PriorityQueue<>();
-    static StringBuilder sb = new StringBuilder();
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
+        StringBuilder answer = new StringBuilder();
 
+        n = Integer.parseInt(br.readLine());
         map = new int[n][n];
         visited = new boolean[n][n];
+
         for (int i = 0; i < n; i++) {
-            String str = br.readLine();
+            String[] arr = br.readLine().split("");
+
             for (int j = 0; j < n; j++) {
-                map[i][j] = str.charAt(j) - 48;
+                map[i][j] = Integer.parseInt(arr[j]);
             }
         }
 
+        
+        // 우선순위 큐에 넣으면 오름차순 정렬 할 필요가 없음
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if(!visited[i][j] && map[i][j] == 1) {
-                    bfs(i, j);
+                // 방문한 적 없고, 집이 있는 위치가 나오면 bfs 검색 시작
+                if (!visited[i][j] && map[i][j] == 1) {
+                    pq.offer(bfs(i, j));
                 }
             }
         }
 
-        sb.append(pq.size()).append("\n");
+        answer.append(pq.size()).append("\n");
+
         while (!pq.isEmpty()) {
-            sb.append(pq.poll()).append("\n");
+            answer.append(pq.poll()).append("\n");
         }
 
-        System.out.println(sb);
-
+        System.out.println(answer);
     }
 
-    private static void bfs(int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
-        visited[x][y] = true;
-        int count = 1;
+    private static int bfs(int x, int y) {
 
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{x, y});
+
+        visited[x][y] = true;
+
+        int count = 1;
+        
         while (!queue.isEmpty()) {
-            int[] pos = queue.poll();
-            int curX = pos[0];
-            int curY = pos[1];
+
+            int[] curr = queue.poll();
+
+            int cx = curr[0];
+            int cy = curr[1];
 
             for (int i = 0; i < 4; i++) {
-                int nx = curX + dx[i];
-                int ny = curY + dy[i];
+                int nx = cx + dx[i];
+                int ny = cy + dy[i];
 
                 if (nx >= 0 && nx < n && ny >= 0 && ny < n) {
                     if (!visited[nx][ny] && map[nx][ny] == 1) {
+                        queue.offer(new int[]{nx, ny});
                         visited[nx][ny] = true;
-                        queue.add(new int[]{nx, ny});
                         count++;
                     }
                 }
             }
         }
 
-        pq.add(count);
+        return count;
     }
 }
