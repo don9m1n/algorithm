@@ -67,13 +67,11 @@ public class Main {
                     if (!visited[nx][ny]) {
                         // 사람을 만난 경우 count++ 하고 큐에 위치 저장
                         if (arr[nx][ny].equals("P")) {
-                            queue.offer(new int[]{nx, ny});
-                            visited[nx][ny] = true;
                             count++;
                         }
 
                         // 벽이 아닌 경우 큐에 위치 저장
-                        if (arr[nx][ny].equals("O")) {
+                        if (!arr[nx][ny].equals("X")) {
                             queue.offer(new int[]{nx, ny});
                             visited[nx][ny] = true;
                         }
