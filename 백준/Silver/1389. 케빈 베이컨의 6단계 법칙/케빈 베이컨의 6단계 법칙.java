@@ -25,26 +25,24 @@ public class Main {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
 
-            // 인접 행렬 초기화
             arr[a][b] = 1;
             arr[b][a] = 1;
         }
 
         int min = Integer.MAX_VALUE;
-        Map<Integer, Integer> result = new HashMap<>();
+        int index = 0;
+
         for (int i = 1; i <= n; i++) {
             int sum = bfs(i);
-            min = Math.min(min, sum);
 
-            result.put(i, sum);
-        }
-
-        for (Integer key : result.keySet()) {
-            if(result.get(key) == min) {
-                System.out.println(key);
-                break;
+            if (sum < min) {
+                min = sum;
+                index = i;
             }
         }
+
+        System.out.println(index);
+
     }
 
     private static int bfs(int v) {
