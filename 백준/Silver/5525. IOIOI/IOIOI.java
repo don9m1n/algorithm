@@ -9,8 +9,7 @@ public class Main {
         int m = Integer.parseInt(br.readLine());
         String str = br.readLine();
 
-        // 부분 문자열
-        int i = 0;
+        int i = 1;
         int count = 0;
         int answer = 0;
         while (i < m - 1) {
