@@ -19,15 +19,11 @@ class Solution {
                     maxQueue.add(num);
                     break;
                 case "D":
-                    if (num == 1) {
-                        if(!maxQueue.isEmpty()) {
-                            int removed = maxQueue.poll();
-                            minQueue.remove(removed);
-                        }
-                    } else {
-                        if(!minQueue.isEmpty()) {
-                            int removed = minQueue.poll();
-                            maxQueue.remove(removed);
+                    if(!maxQueue.isEmpty()) {
+                        if (num == 1) {
+                            minQueue.remove(maxQueue.poll());
+                        } else {
+                            maxQueue.remove(minQueue.poll());
                         }
                     }
                     break;
@@ -35,10 +31,10 @@ class Solution {
         }
 
         int[] answer = new int[2];
-        
+
         if(!(minQueue.isEmpty() || maxQueue.isEmpty())) {
-            answer[0] = maxQueue.poll();
-            answer[1] = minQueue.poll();
+            answer[0] = maxQueue.peek();
+            answer[1] = minQueue.peek();
         }
 
         return answer;
