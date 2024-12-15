@@ -1,61 +1,44 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 class Solution {
     public int[] solution(String[] operations) {
-        int[] answer = new int[2];
-        PriorityQueue<Integer> pq1 = new PriorityQueue<>(Comparator.reverseOrder());
-        PriorityQueue<Integer> pq2 = new PriorityQueue<>();
+        PriorityQueue<Integer> minQueue = new PriorityQueue<>();
+        PriorityQueue<Integer> maxQueue = new PriorityQueue<>(Comparator.reverseOrder());
 
         for (String operation : operations) {
-            String command = operation.split(" ")[0];
-            int number = Integer.parseInt(operation.split(" ")[1]);
+
+            String[] commands = operation.split(" ");
+            String command = commands[0];
+            int num = Integer.parseInt(commands[1]);
 
             switch (command) {
                 case "I":
-                    if (number >= 0) {
-                        pq1.add(number);
-                    } else {
-                        pq2.add(number);
-                    }
+                    minQueue.add(num);
+                    maxQueue.add(num);
                     break;
                 case "D":
-                    if (number == 1) {
-                        if (pq1.isEmpty()) {
-                            while (pq2.size() > 1) {
-                                pq1.add(pq2.poll());
-                            }
-                            pq2.poll();
-                        } else {
-                            pq1.poll();
+                    if (num == 1) {
+                        if(!maxQueue.isEmpty()) {
+                            int removed = maxQueue.poll();
+                            minQueue.remove(removed);
                         }
                     } else {
-                        if (pq2.isEmpty()) {
-                            while (pq1.size() > 1) {
-                                pq2.add(pq1.poll());
-                            }
-                            pq1.poll();
-                        } else {
-                            pq2.poll();
+                        if(!minQueue.isEmpty()) {
+                            int removed = minQueue.poll();
+                            maxQueue.remove(removed);
                         }
                     }
                     break;
             }
         }
 
-        List<Integer> list = new ArrayList<>();
-        while (!pq1.isEmpty()) {
-            list.add(pq1.poll());
-        }
-
-        while (!pq2.isEmpty()) {
-            list.add(pq2.poll());
-        }
-
-        Collections.sort(list);
-
-        if (!list.isEmpty()) {
-            answer[0] = list.get(list.size() - 1);
-            answer[1] = list.get(0);
+        int[] answer = new int[2];
+        
+        if(!(minQueue.isEmpty() || maxQueue.isEmpty())) {
+            answer[0] = maxQueue.poll();
+            answer[1] = minQueue.poll();
         }
 
         return answer;
